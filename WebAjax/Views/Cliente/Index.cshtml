@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Models.Cliente>
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+</head>
+<body>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+    <div id="div1" name="div1"></div>
+    
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var url = 'http://localhost:25636/api/cliente/';
+
+            Get(url);                        
+        });
+
+        function Get(url) {
+
+            var html = '<table class="tb" style="border: 1px solid black;" id="tb1">' +
+                '<tr><th>Nome</th><th>Data Nascimento</th><th>E-Mail</th><th></th></tr>';
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (result) {
+                    for (var i = 0, l = result.length; i < l; i++) {
+                        html = html +
+                            '<tr><td>' + result[i].Nome + '</td>' +
+                            '<td>' + result[i].DtNasc + '</td>' +
+                            '<td>' + result[i].Email + '</td>' +
+                            '<td> <a name="btnEdit" href="Cliente/Edit/' + result[i].ClienteId + '">Edit</a> | ' +
+                            '<a name="btnDelete" href="javascript:Delete(' + result[i].ClienteId +');">Delete</a></td></tr>';
+                    }
+
+                    html = html + '</table>';
+
+                    $("#div1").append(html);
+                }
+            });
+        }
+
+        function Delete(clienteId) {
+
+            var url = 'http://localhost:25636/api/cliente';
+
+            $.ajax({
+                url: url + '?id=' + clienteId,
+                type: 'DELETE',
+                success: function (result) {
+                    alert('Cliente ' + clienteId + ' apagado com sucesso.');
+                }
+            });
+
+            location.reload();
+        }
+    </script>
+
+</body>
+</html>

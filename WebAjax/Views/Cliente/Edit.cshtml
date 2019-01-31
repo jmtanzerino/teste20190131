@@ -1,0 +1,123 @@
+﻿@model Models.Cliente
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Cliente</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ClienteId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @id = "txtNome", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DtNasc, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DtNasc, new { htmlAttributes = new { @id = "txtDtNasc", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DtNasc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @id = "txtEmail", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="btnEditar" type="submit" value="Edit" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var clienteId = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+
+            Get(clienteId);
+
+            $('#btnEditar').click(function (e) {
+
+                e.preventDefault();
+
+                Edit(clienteId);
+
+                return false;
+            });
+
+        });
+
+        function Get(clienteId) {
+
+            var url = 'http://localhost:25636/api/cliente';
+
+            $.ajax({
+                url: url + '/' + clienteId,
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    $("#txtNome").val(result.Nome);
+                    $("#txtDtNasc").val(result.DtNasc);
+                    $("#txtEmail").val(result.Email);
+                }
+            });
+        }
+
+        function Edit(clienteId) {
+
+            var url = 'http://localhost:25636/api/cliente';
+
+            $.ajax({
+                url: url + '/' + clienteId,
+                type: "PUT",
+                data: JSON.stringify({ "ClienteId": clienteId, "Nome": $("#txtNome").val(), "DtNasc": $("#txtDtNasc").val(), "Email": $("#txtEmail").val() }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    alert("Cliente editado com sucesso.");
+                },
+                error: function () {
+                    alert("Erro no cadastro.");
+                }
+            });
+
+
+        }
+
+    </script>
+
+</body>
+
+</html>
