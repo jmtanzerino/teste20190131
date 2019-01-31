@@ -9,42 +9,20 @@
 <html ng-app="ClienteApp" ng-controller="ClienteController">
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Index - ANGULAR</title>
     <script src="~/Scripts/angular.js"></script>
 
 </head>
 <body>
-
-    <script type="text/javascript">
-        (function () {
-            angular.module("ClienteApp", [])
-                .controller("ClienteController", ClienteControllerFunction);
-
-            function ClienteControllerFunction($scope, $http) {
-
-                $scope.hello = "hello there";
-
-                $http.get('http://localhost:9023/api/cliente/get').
-                    success(function (data, status, headers, config) {
-                        $scope.Clientes = data;
-                    }).
-                    error(function (data, status, headers, config) {
-                        alert('error');
-                    });
-            };
-
-        })();
-
-    </script>
 
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
 
     <p>
-        
+
     </p>
-    
+
     <table class="table">
         <tr ng-repeat="cliente in Clientes">
             <td>{{cliente.Nome}}</td>
@@ -87,6 +65,19 @@
 
     </table>
 
+    <script type="text/javascript">
+        var ClienteApp = angular.module("ClienteApp", []).
+            controller("ClienteController", function ($scope, $http) {
+                $http.get('http://localhost:25636/api/cliente/').then(function (response) {
+                    $scope.Clientes = response.data;
+            });
+            });
+
+
+
+        
+
+    </script>
 
 </body>
 </html>

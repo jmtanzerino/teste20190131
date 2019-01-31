@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{ADC73103-02A2-414C-BFB0-F22592E6438E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTesteEntity", "ConsoleTesteEntity\ConsoleTesteEntity.csproj", "{438F935F-F917-4658-85E6-61110FD51EB7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiService", "WebApiService\WebApiService.csproj", "{9FB88967-79F3-4883-9801-9C5D74268C55}"
 EndProject
 Global
@@ -37,10 +35,6 @@ Global
 		{ADC73103-02A2-414C-BFB0-F22592E6438E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADC73103-02A2-414C-BFB0-F22592E6438E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADC73103-02A2-414C-BFB0-F22592E6438E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{438F935F-F917-4658-85E6-61110FD51EB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{438F935F-F917-4658-85E6-61110FD51EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{438F935F-F917-4658-85E6-61110FD51EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{438F935F-F917-4658-85E6-61110FD51EB7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9FB88967-79F3-4883-9801-9C5D74268C55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9FB88967-79F3-4883-9801-9C5D74268C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FB88967-79F3-4883-9801-9C5D74268C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
