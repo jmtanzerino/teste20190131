@@ -971,6 +971,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Cliente\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

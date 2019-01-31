@@ -24,10 +24,7 @@
     </p>
 
     <table class="table">
-        <tr ng-repeat="cliente in Clientes">
-            <td>{{cliente.Nome}}</td>
-        </tr>
-
+        
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
@@ -62,6 +59,18 @@
                 </tr>
             }
         }
+        else
+        {
+            <tr ng-repeat="cliente in Clientes">
+                <td>{{cliente.Nome}}</td>
+                <td>{{cliente.DtNasc}}</td>
+                <td>{{cliente.Email}}</td>
+                <td>
+                    <a data-ng-href="@Url.Action("Edit", "Cliente")/{{cliente.Id}}">Edit</a> |
+                    <a data-ng-href="@Url.Action("Delete", "Cliente")/{{cliente.Id}}">Delete</a>
+                </td>
+            </tr>
+        }
 
     </table>
 
@@ -71,12 +80,7 @@
                 $http.get('http://localhost:25636/api/cliente/').then(function (response) {
                     $scope.Clientes = response.data;
             });
-            });
-
-
-
-        
-
+            });        
     </script>
 
 </body>

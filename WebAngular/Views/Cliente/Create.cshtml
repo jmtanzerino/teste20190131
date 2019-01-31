@@ -1,0 +1,82 @@
+﻿@model Models.Cliente
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="ClienteApp" ng-controller="ClienteController">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create - ANGULAR</title>
+    <script src="~/Scripts/angular.js"></script>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Cliente</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input id="txtNome" type="text" class="form-control" ng-model="Nome" required />                    
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DtNasc, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input id="txtDtNasc" type="text" class="form-control" ng-model="DtNasc" required />                   
+                    @Html.ValidationMessageFor(model => model.DtNasc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input id="txtEmail" type="text" class="form-control" ng-model="Email" required />                    
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" ng-click="Create()" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    <script type="text/javascript">
+        var ClienteApp = angular.module("ClienteApp", []).
+            controller("ClienteController", function ($scope, $http) {
+                $scope.Create = function () {                    
+                    $scope.Cliente = {};
+                    $scope.Cliente.Id = 0;
+                    $scope.Cliente.Nome = $scope.Nome;
+                    $scope.Cliente.DtNasc = $scope.DtNasc;
+                    $scope.Cliente.Email = $scope.Email;
+                    $http({
+                        method: "POST",
+                        url: "http://localhost:25636/api/cliente",
+                        datatype: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify($scope.Cliente)
+                    })
+
+                    return false;
+                }
+            });
+    </script>
+</body>
+</html>
